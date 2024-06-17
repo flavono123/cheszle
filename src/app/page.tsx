@@ -1,6 +1,6 @@
 'use client'
 
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useState } from "react";
 import Board from "./components/Board";
 
 const canMoveKnight = (toX: number, toY: number, knightPosition: number[]): boolean => {
@@ -11,17 +11,24 @@ const canMoveKnight = (toX: number, toY: number, knightPosition: number[]): bool
 };
 
 export default function Home() {
-  const [knightPosition, setKnightPosition] = useState([7, 4]);
+  const [knightPosition, setKnightPosition] = useState([7, 3]);
 
-  const handleSquareClick = useCallback((toX: number, toY: number) => {
+  const handleSquareDrop = useCallback((toX: number, toY: number) => {
+    console.log(`Before kngihgtPosition: ${knightPosition}`); // 이동 전 로그
+    console.log(`Trying to move to (${toX}, ${toY})`); // 드랍 시도 로그
     if (canMoveKnight(toX, toY, knightPosition)) {
+      console.log(`Moving to (${toX}, ${toY})`); // 이동 로그
       setKnightPosition([toX, toY]);
+      console.log(`After knightPosition: ${knightPosition}`); // 이동 후 로그
     }
   }, [knightPosition]);
 
   return (
     <main>
-      <Board knightPosition={knightPosition} handleSquareClick={handleSquareClick} />
+      <Board
+        knightPosition={knightPosition}
+        handleSquareDrop={handleSquareDrop}
+      />
     </main >
   );
 }

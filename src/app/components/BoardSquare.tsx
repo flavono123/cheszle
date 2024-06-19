@@ -1,6 +1,9 @@
 import React, { ReactNode, useRef } from 'react'
 
+import { useStore } from '../store/useStore'
+
 import Square from './Square'
+import Overlay from './Overlay'
 import { useDrop } from 'react-dnd'
 import { ItemType } from '../types/item'
 
@@ -11,18 +14,23 @@ interface BoardSquareProps {
   handleSquareDrop: (toX: number, toY: number) => void
 }
 
+
 export default function BoardSquare({ x, y, children, handleSquareDrop }: BoardSquareProps): ReactNode {
   const black = (x + y) % 2 === 1
-  const [{ isOver }, drop] = useDrop(() => ({
+  const { canMoveKnight } = useStore();
+  const [{ isOver, canDrop }, drop] = useDrop(() => ({
     accept: ItemType.KNIGHT,
+    canDrop: () => canMoveKnight(x, y),
     drop: () => handleSquareDrop(x, y),
     collect: monitor => ({
       isOver: !!monitor.isOver(),
+      canDrop: !!monitor.canDrop(),
     }),
   }), [x, y, handleSquareDrop]);
   const ref = useRef<HTMLDivElement>(null)
 
   drop(ref)
+
   return (
     <div
       ref={ref}
@@ -47,6 +55,10 @@ export default function BoardSquare({ x, y, children, handleSquareDrop }: BoardS
           }}
         />
       )}
+      {isOver && !canDrop && <Overlay color="red" />}
+      {!isOver && canDrop && <Overlay color="yellow" />}
+      {isOver && canDrop && <Overlay color="green" />}
     </div>
   );
 }
+

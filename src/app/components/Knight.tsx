@@ -21,7 +21,7 @@ export default function Knight(): ReactNode {
       ref={ref}
       style={{
         opacity: isDragging ? 0.5 : 1,
-        fontSize: '40',
+        fontSize: '3em',
         fontWeight: 'bold',
         cursor: 'move',
       }}

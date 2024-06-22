@@ -6,11 +6,13 @@ import { HTML5Backend } from 'react-dnd-html5-backend'
 // components
 import Knight from './Knight'
 import BoardSquare from './BoardSquare'
+import InstuctionSquares from './InstructionSquares'
 
 // constants
 import {
   BoardStyle,
   BoardSquareStyle,
+  InstructionSquaresStyle,
   TotalSquares
 } from '../constants/styles'
 
@@ -25,6 +27,21 @@ function renderSquare(
 ): ReactNode {
   const x = i % 6
   const y = Math.floor(i / 6)
+
+  if (y === 2 && x === 0) {
+    return (
+      <div
+        style={InstructionSquaresStyle}
+      >
+        <InstuctionSquares />
+      </div>
+    );
+  }
+
+  if (y === 2 && (x === 1 || x === 2 || x === 3)) {
+    return null; // 이 부분은 InstructionSquares에 의해 대체됩니다.
+  }
+
 
   return (
     <div

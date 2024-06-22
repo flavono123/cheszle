@@ -2,6 +2,7 @@ import { create } from 'zustand';
 
 type Store = {
   knightPosition: [number, number];
+  goalCoord: [number, number];
   setKnightPosition: (position: [number, number]) => void;
   canMoveKnight: (toX: number, toY: number) => boolean;
   handleSquareDrop: (toX: number, toY: number) => void;
@@ -9,6 +10,7 @@ type Store = {
 
 export const useStore = create<Store>((set, get) => ({
   knightPosition: [0, 0],
+  goalCoord: [5, 2],
   setKnightPosition: (position) => set({ knightPosition: position }),
   canMoveKnight: (toX, toY) => {
     const [x, y] = get().knightPosition;

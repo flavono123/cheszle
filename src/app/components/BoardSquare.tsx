@@ -10,13 +10,19 @@ import { ItemType } from '../types/item'
 interface Props {
   x: number
   y: number
+  isGoal: boolean
   children: React.ReactNode
   handleSquareDrop: (toX: number, toY: number) => void
 }
 
+const BOARD_COLORS = {
+  dark: '#8B4513',
+  light: '#DEB887'
+}
 
-export default function BoardSquare({ x, y, children, handleSquareDrop }: Props): ReactNode {
+export default function BoardSquare({ x, y, isGoal, children, handleSquareDrop }: Props): ReactNode {
   const dark = (x + y) % 2 === 1
+  const color = isGoal ? 'black' : dark ? BOARD_COLORS.dark : BOARD_COLORS.light
   const { canMoveKnight } = useStore();
   const [{ isOver, canDrop }, drop] = useDrop(() => ({
     accept: ItemType.KNIGHT,
@@ -40,7 +46,7 @@ export default function BoardSquare({ x, y, children, handleSquareDrop }: Props)
         height: '100%',
       }}
     >
-      <Square dark={dark}>{children}</Square>
+      <Square color={color}>{children}</Square>
       {isOver && (
         <div
           style={{

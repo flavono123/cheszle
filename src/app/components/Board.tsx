@@ -15,6 +15,7 @@ import {
   InstructionSquaresStyle,
   TotalSquares
 } from '../constants/styles'
+import { useStore } from '../store/useStore'
 
 interface HandleSquareDropCallback {
   (toX: number, toY: number): void
@@ -42,6 +43,8 @@ function renderSquare(
     return null; // 이 부분은 InstructionSquares에 의해 대체됩니다.
   }
 
+  const { goalCoord } = useStore();
+  const [goalX, goalY] = goalCoord;
 
   return (
     <div
@@ -51,6 +54,7 @@ function renderSquare(
       <BoardSquare
         x={x}
         y={y}
+        isGoal={x === goalX && y === goalY}
         handleSquareDrop={handleSquareDrop}
       >
         {renderPiece(x, y, knightPosition)}

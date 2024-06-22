@@ -1,9 +1,10 @@
 // libraries
 import React, { ReactNode, useRef } from 'react'
+import { FaChessKnight } from "react-icons/fa6";
+import { DragPreviewImage, useDrag } from 'react-dnd'
 
 // constants
 import { ItemType } from '../types/item'
-import { DragPreviewImage, useDrag } from 'react-dnd'
 
 export default function Knight(): ReactNode {
   const ref = useRef<HTMLDivElement>(null);
@@ -24,13 +25,13 @@ export default function Knight(): ReactNode {
       <div
         ref={ref}
         style={{
-          opacity: isDragging ? 0.5 : 1,
-          fontSize: '3em',
-          fontWeight: 'bold',
+          color: 'black',
           cursor: 'move',
+          fontSize: '3em',
+          opacity: isDragging ? 0.5 : 1,
         }}
       >
-        ♘
+        <FaChessKnight />
       </div>
     </>
   )

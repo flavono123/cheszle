@@ -8,7 +8,7 @@ type Store = {
 };
 
 export const useStore = create<Store>((set, get) => ({
-  knightPosition: [7, 3],
+  knightPosition: [0, 0],
   setKnightPosition: (position) => set({ knightPosition: position }),
   canMoveKnight: (toX, toY) => {
     const [x, y] = get().knightPosition;

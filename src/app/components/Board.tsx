@@ -7,6 +7,13 @@ import { HTML5Backend } from 'react-dnd-html5-backend'
 import Knight from './Knight'
 import BoardSquare from './BoardSquare'
 
+// constants
+import {
+  BoardStyle,
+  BoardSquareStyle,
+  TotalSquares
+} from '../constants/styles'
+
 interface HandleSquareDropCallback {
   (toX: number, toY: number): void
 }
@@ -16,13 +23,13 @@ function renderSquare(
   knightPosition: number[],
   handleSquareDrop: HandleSquareDropCallback,
 ): ReactNode {
-  const x = i % 8
-  const y = Math.floor(i / 8)
+  const x = i % 6
+  const y = Math.floor(i / 6)
 
   return (
     <div
       key={i}
-      style={{ width: '12.5%', height: '12.5%' }}
+      style={BoardSquareStyle}
     >
       <BoardSquare
         x={x}
@@ -31,7 +38,7 @@ function renderSquare(
       >
         {renderPiece(x, y, knightPosition)}
       </BoardSquare>
-    </div>
+    </div >
   )
 }
 
@@ -52,7 +59,7 @@ interface Props {
 
 export default function Board({ knightPosition, handleSquareDrop }: Props): ReactNode {
   const squares: ReactNode[] = []
-  for (let i = 0; i < 64; i++) {
+  for (let i = 0; i < TotalSquares; i++) {
     squares.push(renderSquare(i, knightPosition, handleSquareDrop))
   }
 
@@ -60,8 +67,7 @@ export default function Board({ knightPosition, handleSquareDrop }: Props): Reac
     <DndProvider backend={HTML5Backend}>
       <div
         style={{
-          width: '400px',
-          height: '400px',
+          ...BoardStyle,
           display: 'flex',
           flexWrap: 'wrap'
         }}

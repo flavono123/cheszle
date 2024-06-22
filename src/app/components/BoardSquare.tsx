@@ -16,7 +16,7 @@ interface Props {
 
 
 export default function BoardSquare({ x, y, children, handleSquareDrop }: Props): ReactNode {
-  const black = (x + y) % 2 === 1
+  const dark = (x + y) % 2 === 1
   const { canMoveKnight } = useStore();
   const [{ isOver, canDrop }, drop] = useDrop(() => ({
     accept: ItemType.KNIGHT,
@@ -40,7 +40,7 @@ export default function BoardSquare({ x, y, children, handleSquareDrop }: Props)
         height: '100%',
       }}
     >
-      <Square black={black}>{children}</Square>
+      <Square dark={dark}>{children}</Square>
       {isOver && (
         <div
           style={{

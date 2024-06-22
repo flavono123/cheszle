@@ -1,13 +1,18 @@
 import React, { ReactNode } from 'react'
 
 interface Props {
-  black: boolean
+  dark: boolean
   children: ReactNode
 }
 
-export default function Square({ black, children }: Props): ReactNode {
-  const fill = black ? 'black' : 'white'
-  const stroke = black ? 'white' : 'black'
+const BOARD_COLORS = {
+  dark: '#8B4513',
+  light: '#DEB887'
+}
+
+export default function Square({ dark, children }: Props): ReactNode {
+  const fill = dark ? BOARD_COLORS.dark : BOARD_COLORS.light
+  const stroke = dark ? 'white' : 'black'
 
   return (
     <div

@@ -45,12 +45,12 @@ function renderPiece(
   }
 }
 
-interface BoardProps {
+interface Props {
   knightPosition: number[],
   handleSquareDrop: HandleSquareDropCallback,
 }
 
-export default function Board({ knightPosition, handleSquareDrop }: BoardProps): ReactNode {
+export default function Board({ knightPosition, handleSquareDrop }: Props): ReactNode {
   const squares: ReactNode[] = []
   for (let i = 0; i < 64; i++) {
     squares.push(renderSquare(i, knightPosition, handleSquareDrop))

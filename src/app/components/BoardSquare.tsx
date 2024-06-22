@@ -7,7 +7,7 @@ import Overlay from './Overlay'
 import { useDrop } from 'react-dnd'
 import { ItemType } from '../types/item'
 
-interface BoardSquareProps {
+interface Props {
   x: number
   y: number
   children: React.ReactNode
@@ -15,7 +15,7 @@ interface BoardSquareProps {
 }
 
 
-export default function BoardSquare({ x, y, children, handleSquareDrop }: BoardSquareProps): ReactNode {
+export default function BoardSquare({ x, y, children, handleSquareDrop }: Props): ReactNode {
   const black = (x + y) % 2 === 1
   const { canMoveKnight } = useStore();
   const [{ isOver, canDrop }, drop] = useDrop(() => ({

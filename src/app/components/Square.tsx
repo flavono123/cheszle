@@ -1,11 +1,11 @@
 import React, { ReactNode } from 'react'
 
-interface SquareProps {
+interface Props {
   black: boolean
   children: ReactNode
 }
 
-export default function Square({ black, children }: SquareProps): ReactNode {
+export default function Square({ black, children }: Props): ReactNode {
   const fill = black ? 'black' : 'white'
   const stroke = black ? 'white' : 'black'
 

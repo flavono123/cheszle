@@ -6,6 +6,7 @@ type Store = {
   setKnightPosition: (position: [number, number]) => void;
   canMoveKnight: (toX: number, toY: number) => boolean;
   handleSquareDrop: (toX: number, toY: number) => void;
+  isCleared: () => boolean;
 };
 
 export const useStore = create<Store>((set, get) => ({
@@ -22,5 +23,10 @@ export const useStore = create<Store>((set, get) => ({
     if (get().canMoveKnight(toX, toY)) {
       get().setKnightPosition([toX, toY]);
     }
+  },
+  isCleared: () => {
+    const [x, y] = get().knightPosition;
+    const [goalX, goalY] = get().goalCoord;
+    return x === goalX && y === goalY;
   }
 }));

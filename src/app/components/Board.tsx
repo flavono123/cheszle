@@ -16,6 +16,7 @@ import {
   TotalSquares
 } from '../constants/styles'
 import { useStore } from '../store/useStore'
+import Draggable from './Dragable'
 
 interface HandleSquareDropCallback {
   (toX: number, toY: number): void
@@ -69,7 +70,11 @@ function renderPiece(
   [knightX, knightY]: number[]
 ) {
   if (x === knightX && y === knightY) {
-    return <Knight />
+    return (
+      <Draggable>
+        <Knight />
+      </Draggable>
+    );
   }
 }
 

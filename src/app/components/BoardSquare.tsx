@@ -11,7 +11,7 @@ interface Props {
   x: number
   y: number
   isGoal: boolean
-  children: React.ReactNode
+  children: ReactNode
   handleSquareDrop: (toX: number, toY: number) => void
 }
 

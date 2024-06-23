@@ -18,10 +18,7 @@ import {
 import { useStore } from '../store/useStore'
 import Draggable from './Dragable'
 
-function renderSquare(
-  i: number,
-  knightPosition: number[],
-): ReactNode {
+function renderSquare(i: number): ReactNode {
   const x = i % 6
   const y = Math.floor(i / 6)
 
@@ -39,7 +36,7 @@ function renderSquare(
     return null; // 이 부분은 InstructionSquares에 의해 대체됩니다.
   }
 
-  const { goalCoord } = useStore();
+  const { goalCoord, knightPosition } = useStore();
   const [goalX, goalY] = goalCoord;
 
   return (
@@ -72,14 +69,10 @@ function renderPiece(
   }
 }
 
-interface Props {
-  knightPosition: number[],
-}
-
-export default function Board({ knightPosition }: Props): ReactNode {
+export default function Board(): ReactNode {
   const squares: ReactNode[] = []
   for (let i = 0; i < TotalSquares; i++) {
-    squares.push(renderSquare(i, knightPosition))
+    squares.push(renderSquare(i))
   }
 
   return (

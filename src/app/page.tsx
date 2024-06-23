@@ -5,13 +5,11 @@ import { useStore } from "./store/useStore";
 import Board from "./components/Board";
 
 export default function Home() {
-  const { knightPosition, isCleared } = useStore();
+  const { isCleared } = useStore();
 
   return (
     <main>
-      <Board
-        knightPosition={knightPosition}
-      />
+      <Board />
       {isCleared() && (
         <h1>DONE</h1>
       )}

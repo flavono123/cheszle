@@ -1,15 +1,19 @@
 import React, { ReactNode, useRef } from 'react';
 import { useDrag } from 'react-dnd';
+
 import { ItemType } from '../types/item';
+import { Piece } from '../types/piece';
 
 interface Props {
+  piece: Piece;
   children: ReactNode;
 }
 
-export default function Draggable({ children }: Props): ReactNode {
+export default function Draggable({ piece, children }: Props): ReactNode {
   const ref = useRef<HTMLDivElement>(null);
   const [{ isDragging }, drag] = useDrag(() => ({
     type: ItemType.KNIGHT,
+    item: piece,
     collect: (monitor) => ({
       isDragging: !!monitor.isDragging(),
     }),

@@ -6,6 +6,7 @@ import Square from './Square'
 import Overlay from './Overlay'
 import { useDrop } from 'react-dnd'
 import { ItemType } from '../types/item'
+import { Piece } from '../types/piece'
 
 interface Props {
   x: number
@@ -19,15 +20,16 @@ const BOARD_COLORS = {
   light: '#DEB887'
 }
 
+// this is only droppable
 export default function BoardSquare({ x, y, isGoal, children }: Props): ReactNode {
   const dark = (x + y) % 2 === 1
   const color = isGoal ? 'black' : dark ? BOARD_COLORS.dark : BOARD_COLORS.light
-  const { canMoveKnight, handleSquareDrop } = useStore();
+  const { canMovePiece, handleSquareDrop } = useStore();
   const to = { x, y };
   const [{ isOver, canDrop }, drop] = useDrop(() => ({
     accept: ItemType.KNIGHT,
-    canDrop: () => canMoveKnight(to),
-    drop: () => handleSquareDrop(to),
+    canDrop: (item: Piece) => canMovePiece(item, to),
+    drop: (item: Piece) => handleSquareDrop(item, to),
     collect: monitor => ({
       isOver: !!monitor.isOver(),
       canDrop: !!monitor.canDrop(),

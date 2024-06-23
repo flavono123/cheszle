@@ -18,7 +18,7 @@ import {
   InstructionSquaresStyle,
   TotalSquares
 } from '../constants/styles'
-import { Position } from '../types/position'
+import { Piece } from '../types/piece'
 
 
 function renderSquare(i: number): ReactNode {
@@ -39,8 +39,8 @@ function renderSquare(i: number): ReactNode {
     return null; // 이 부분은 InstructionSquares에 의해 대체됩니다.
   }
 
-  const { goalPosition, knightPosition } = useStore();
-
+  const { goalPosition, findPieceByPosition } = useStore();
+  const piece = findPieceByPosition({ x, y });
   return (
     <div
       key={i}
@@ -51,25 +51,19 @@ function renderSquare(i: number): ReactNode {
         y={y}
         isGoal={x === goalPosition.x && y === goalPosition.y}
       >
-        {renderPiece(x, y, knightPosition)}
+        {renderPiece(piece)}
       </BoardSquare>
     </div >
   )
 }
 
-function renderPiece(
-  x: number,
-  y: number,
-  knightPosition: Position,
-) {
-  const { x: knightX, y: knightY } = knightPosition;
-  if (x === knightX && y === knightY) {
+function renderPiece(piece: Piece): ReactNode {
+  if (piece && piece.type === 'knight')
     return (
-      <Draggable>
+      <Draggable piece={piece}>
         <Knight />
       </Draggable>
     );
-  }
 }
 
 export default function Board(): ReactNode {

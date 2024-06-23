@@ -9,6 +9,7 @@ import { useStore } from '../store/useStore'
 import Draggable from './Dragable'
 import Knight from './Knight'
 import Bishop from './Bishop'
+import Rook from './Rook'
 import BoardSquare from './BoardSquare'
 import InstuctionSquares from './InstructionSquares'
 
@@ -73,6 +74,12 @@ function renderPiece(piece: Piece | null): ReactNode {
       return (
         <Draggable piece={piece}>
           <Bishop color={piece.color} />
+        </Draggable>
+      );
+    case 'rook':
+      return (
+        <Draggable piece={piece}>
+          <Rook color={piece.color} />
         </Draggable>
       );
   }

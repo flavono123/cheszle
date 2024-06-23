@@ -25,6 +25,9 @@ function canMoveBishop(from: Position, to: Position) {
   return dx === dy;
 }
 
+function canMoveRook(from: Position, to: Position) {
+  return from.x === to.x || from.y === to.y;
+}
 
 export const useStore = create<Store>((set, get) => ({
   pieces: [
@@ -100,6 +103,38 @@ export const useStore = create<Store>((set, get) => ({
         x: 4, y: 0,
       }
     },
+    {
+      name: 'yi',
+      type: 'rook',
+      color: 'white',
+      position: {
+        x: 5, y: 0,
+      }
+    },
+    {
+      name: 'er',
+      type: 'rook',
+      color: 'white',
+      position: {
+        x: 4, y: 1,
+      }
+    },
+    {
+      name: 'san',
+      type: 'rook',
+      color: 'white',
+      position: {
+        x: 5, y: 1,
+      }
+    },
+    {
+      name: 'si',
+      type: 'rook',
+      color: 'white',
+      position: {
+        x: 4, y: 2,
+      }
+    },
   ],
   goalPosition: { x: 5, y: 2 },
   findPiece: (name, type) => {
@@ -129,6 +164,8 @@ export const useStore = create<Store>((set, get) => ({
         return canMoveKnight(from, to);
       case 'bishop':
         return canMoveBishop(from, to);
+      case 'rook':
+        return canMoveRook(from, to);
       default:
         return false
     }

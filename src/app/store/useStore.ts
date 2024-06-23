@@ -1,7 +1,14 @@
 // fine should be renamed
 import { create } from 'zustand';
 
-import { Position, Piece } from '../types/piece';
+import { Position, Piece, PieceType } from '../types/piece';
+
+type MoveCount = {
+  total: number;
+  knight: number;
+  bishop: number;
+  rook: number;
+};
 
 type Store = {
   pieces: Piece[];
@@ -11,6 +18,8 @@ type Store = {
   setPiecePosition: (piece: Piece, to: Position) => void;
   canMovePiece: (piece: Piece, to: Position) => boolean;
   handleSquareDrop: (from: Piece, to: Position) => void;
+  moveCount: MoveCount;
+  countMovement: (type: PieceType) => void;
   isCleared: () => boolean;
 };
 
@@ -173,8 +182,22 @@ export const store = create<Store>((set, get) => ({
   },
   handleSquareDrop: (piece, to) => {
     if (get().canMovePiece(piece, to)) {
-      get().setPiecePosition(piece, to)
+      get().setPiecePosition(piece, to);
+      get().countMovement(piece.type);
     }
+  },
+  moveCount: {
+    total: 0,
+    knight: 0,
+    bishop: 0,
+    rook: 0,
+  },
+  countMovement: (type) => {
+    const count = get().moveCount;
+    count.total++;
+    count[type]++;
+    console.log(count);
+    set({ moveCount: count });
   },
   isCleared: () => {
     const blackKnight = get().findPiece('black', 'knight');

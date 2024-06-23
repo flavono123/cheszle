@@ -3,7 +3,7 @@ export type Position = {
   y: number;
 };
 
-type PieceType = 'knight' | 'bishop' | 'rook';
+export type PieceType = 'knight' | 'bishop' | 'rook';
 export type PieceColor = 'black' | 'white';
 
 export type Piece = {

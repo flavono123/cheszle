@@ -3,6 +3,7 @@
 // store: zustand
 import { store } from "./store/useStore";
 import Board from "./components/Board";
+import Result from "./components/Result";
 
 export default function Home() {
   const { isCleared } = store();
@@ -11,7 +12,7 @@ export default function Home() {
     <main>
       <Board />
       {isCleared() && (
-        <h1>DONE</h1>
+        <Result />
       )}
     </main >
   );

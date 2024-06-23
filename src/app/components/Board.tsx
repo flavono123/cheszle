@@ -3,7 +3,10 @@ import React, { ReactNode } from 'react'
 import { DndProvider } from 'react-dnd'
 import { HTML5Backend } from 'react-dnd-html5-backend'
 
+import { useStore } from '../store/useStore'
+
 // components
+import Draggable from './Dragable'
 import Knight from './Knight'
 import BoardSquare from './BoardSquare'
 import InstuctionSquares from './InstructionSquares'
@@ -15,8 +18,8 @@ import {
   InstructionSquaresStyle,
   TotalSquares
 } from '../constants/styles'
-import { useStore } from '../store/useStore'
-import Draggable from './Dragable'
+import { Position } from '../types/position'
+
 
 function renderSquare(i: number): ReactNode {
   const x = i % 6
@@ -36,8 +39,7 @@ function renderSquare(i: number): ReactNode {
     return null; // 이 부분은 InstructionSquares에 의해 대체됩니다.
   }
 
-  const { goalCoord, knightPosition } = useStore();
-  const [goalX, goalY] = goalCoord;
+  const { goalPosition, knightPosition } = useStore();
 
   return (
     <div
@@ -47,7 +49,7 @@ function renderSquare(i: number): ReactNode {
       <BoardSquare
         x={x}
         y={y}
-        isGoal={x === goalX && y === goalY}
+        isGoal={x === goalPosition.x && y === goalPosition.y}
       >
         {renderPiece(x, y, knightPosition)}
       </BoardSquare>
@@ -58,8 +60,9 @@ function renderSquare(i: number): ReactNode {
 function renderPiece(
   x: number,
   y: number,
-  [knightX, knightY]: number[]
+  knightPosition: Position,
 ) {
+  const { x: knightX, y: knightY } = knightPosition;
   if (x === knightX && y === knightY) {
     return (
       <Draggable>

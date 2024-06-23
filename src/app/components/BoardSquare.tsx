@@ -23,10 +23,11 @@ export default function BoardSquare({ x, y, isGoal, children }: Props): ReactNod
   const dark = (x + y) % 2 === 1
   const color = isGoal ? 'black' : dark ? BOARD_COLORS.dark : BOARD_COLORS.light
   const { canMoveKnight, handleSquareDrop } = useStore();
+  const to = { x, y };
   const [{ isOver, canDrop }, drop] = useDrop(() => ({
     accept: ItemType.KNIGHT,
-    canDrop: () => canMoveKnight(x, y),
-    drop: () => handleSquareDrop(x, y),
+    canDrop: () => canMoveKnight(to),
+    drop: () => handleSquareDrop(to),
     collect: monitor => ({
       isOver: !!monitor.isOver(),
       canDrop: !!monitor.canDrop(),

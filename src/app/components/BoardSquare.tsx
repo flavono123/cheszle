@@ -12,7 +12,6 @@ interface Props {
   y: number
   isGoal: boolean
   children: ReactNode
-  handleSquareDrop: (toX: number, toY: number) => void
 }
 
 const BOARD_COLORS = {
@@ -20,10 +19,10 @@ const BOARD_COLORS = {
   light: '#DEB887'
 }
 
-export default function BoardSquare({ x, y, isGoal, children, handleSquareDrop }: Props): ReactNode {
+export default function BoardSquare({ x, y, isGoal, children }: Props): ReactNode {
   const dark = (x + y) % 2 === 1
   const color = isGoal ? 'black' : dark ? BOARD_COLORS.dark : BOARD_COLORS.light
-  const { canMoveKnight } = useStore();
+  const { canMoveKnight, handleSquareDrop } = useStore();
   const [{ isOver, canDrop }, drop] = useDrop(() => ({
     accept: ItemType.KNIGHT,
     canDrop: () => canMoveKnight(x, y),

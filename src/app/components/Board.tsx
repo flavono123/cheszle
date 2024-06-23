@@ -18,14 +18,9 @@ import {
 import { useStore } from '../store/useStore'
 import Draggable from './Dragable'
 
-interface HandleSquareDropCallback {
-  (toX: number, toY: number): void
-}
-
 function renderSquare(
   i: number,
   knightPosition: number[],
-  handleSquareDrop: HandleSquareDropCallback,
 ): ReactNode {
   const x = i % 6
   const y = Math.floor(i / 6)
@@ -56,7 +51,6 @@ function renderSquare(
         x={x}
         y={y}
         isGoal={x === goalX && y === goalY}
-        handleSquareDrop={handleSquareDrop}
       >
         {renderPiece(x, y, knightPosition)}
       </BoardSquare>
@@ -80,13 +74,12 @@ function renderPiece(
 
 interface Props {
   knightPosition: number[],
-  handleSquareDrop: HandleSquareDropCallback,
 }
 
-export default function Board({ knightPosition, handleSquareDrop }: Props): ReactNode {
+export default function Board({ knightPosition }: Props): ReactNode {
   const squares: ReactNode[] = []
   for (let i = 0; i < TotalSquares; i++) {
-    squares.push(renderSquare(i, knightPosition, handleSquareDrop))
+    squares.push(renderSquare(i, knightPosition))
   }
 
   return (

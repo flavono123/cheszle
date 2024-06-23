@@ -1,3 +1,4 @@
+// fine should be renamed
 import { create } from 'zustand';
 
 import { Position, Piece } from '../types/piece';
@@ -29,7 +30,7 @@ function canMoveRook(from: Position, to: Position) {
   return from.x === to.x || from.y === to.y;
 }
 
-export const useStore = create<Store>((set, get) => ({
+export const store = create<Store>((set, get) => ({
   pieces: [
     {
       name: 'black',

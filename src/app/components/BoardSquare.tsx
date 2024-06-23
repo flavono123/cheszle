@@ -1,6 +1,6 @@
 import React, { ReactNode, useRef } from 'react'
 
-import { useStore } from '../store/useStore'
+import { store } from '../store/useStore'
 
 import Square from './Square'
 import Overlay from './Overlay'
@@ -24,7 +24,7 @@ const BOARD_COLORS = {
 export default function BoardSquare({ x, y, isGoal, children }: Props): ReactNode {
   const dark = (x + y) % 2 === 1
   const color = isGoal ? 'black' : dark ? BOARD_COLORS.dark : BOARD_COLORS.light
-  const { canMovePiece, handleSquareDrop } = useStore();
+  const { canMovePiece, handleSquareDrop } = store();
   const to = { x, y };
   const [{ isOver, canDrop }, drop] = useDrop(() => ({
     accept: ItemType.KNIGHT,

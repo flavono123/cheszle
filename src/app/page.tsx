@@ -1,11 +1,11 @@
 'use client'
 
 // store: zustand
-import { useStore } from "./store/useStore";
+import { store } from "./store/useStore";
 import Board from "./components/Board";
 
 export default function Home() {
-  const { isCleared } = useStore();
+  const { isCleared } = store();
 
   return (
     <main>

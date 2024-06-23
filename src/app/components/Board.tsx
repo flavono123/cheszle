@@ -3,7 +3,7 @@ import React, { ReactNode } from 'react'
 import { DndProvider } from 'react-dnd'
 import { HTML5Backend } from 'react-dnd-html5-backend'
 
-import { useStore } from '../store/useStore'
+import { store } from '../store/useStore'
 
 // components
 import Draggable from './Dragable'
@@ -41,7 +41,7 @@ function renderSquare(i: number): ReactNode {
     return null; // 이 부분은 InstructionSquares에 의해 대체됩니다.
   }
 
-  const { goalPosition, findPieceByPosition } = useStore();
+  const { goalPosition, findPieceByPosition } = store();
   const piece = findPieceByPosition({ x, y });
   return (
     <div

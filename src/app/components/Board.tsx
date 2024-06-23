@@ -8,6 +8,7 @@ import { useStore } from '../store/useStore'
 // components
 import Draggable from './Dragable'
 import Knight from './Knight'
+import Bishop from './Bishop'
 import BoardSquare from './BoardSquare'
 import InstuctionSquares from './InstructionSquares'
 
@@ -57,13 +58,24 @@ function renderSquare(i: number): ReactNode {
   )
 }
 
-function renderPiece(piece: Piece): ReactNode {
-  if (piece && piece.type === 'knight')
-    return (
-      <Draggable piece={piece}>
-        <Knight color={piece.color} />
-      </Draggable>
-    );
+function renderPiece(piece: Piece | null): ReactNode {
+  if (!piece) {
+    return null
+  }
+  switch (piece.type) {
+    case 'knight':
+      return (
+        <Draggable piece={piece}>
+          <Knight color={piece.color} />
+        </Draggable>
+      );
+    case 'bishop':
+      return (
+        <Draggable piece={piece}>
+          <Bishop color={piece.color} />
+        </Draggable>
+      );
+  }
 }
 
 export default function Board(): ReactNode {

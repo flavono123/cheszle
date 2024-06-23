@@ -1,6 +1,6 @@
 export const ItemType = {
   KNIGHT: 'knight',
-  PAWN: 'pawn',
+  BISHOP: 'bishop',
 }
 
 export const ItemTypeValues = Object.values(ItemType);

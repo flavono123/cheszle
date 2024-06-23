@@ -5,8 +5,8 @@ import { Position, Piece } from '../types/piece';
 type Store = {
   pieces: Piece[];
   goalPosition: Position;
-  findPiece: (name: string, type: string) => Piece;
-  findPieceByPosition: (position: Position) => Piece;
+  findPiece: (name: string, type: string) => Piece | null;
+  findPieceByPosition: (position: Position) => Piece | null;
   setPiecePosition: (piece: Piece, to: Position) => void;
   canMovePiece: (piece: Piece, to: Position) => boolean;
   handleSquareDrop: (from: Piece, to: Position) => void;
@@ -17,6 +17,12 @@ function canMoveKnight(from: Position, to: Position) {
   const dx = Math.abs(to.x - from.x);
   const dy = Math.abs(to.y - from.y);
   return (dx === 2 && dy === 1) || (dx === 1 && dy === 2);
+}
+
+function canMoveBishop(from: Position, to: Position) {
+  const dx = Math.abs(to.x - from.x);
+  const dy = Math.abs(to.y - from.y);
+  return dx === dy;
 }
 
 
@@ -62,13 +68,45 @@ export const useStore = create<Store>((set, get) => ({
         x: 3, y: 1,
       }
     },
+    {
+      name: 'hana',
+      type: 'bishop',
+      color: 'white',
+      position: {
+        x: 1, y: 0,
+      }
+    },
+    {
+      name: 'dul',
+      type: 'bishop',
+      color: 'white',
+      position: {
+        x: 2, y: 0,
+      }
+    },
+    {
+      name: 'set',
+      type: 'bishop',
+      color: 'white',
+      position: {
+        x: 3, y: 0,
+      }
+    },
+    {
+      name: 'net',
+      type: 'bishop',
+      color: 'white',
+      position: {
+        x: 4, y: 0,
+      }
+    },
   ],
   goalPosition: { x: 5, y: 2 },
   findPiece: (name, type) => {
-    return get().pieces.find((p) => p.name === name && p.type === type) ?? <Piece>{};
+    return get().pieces.find((p) => p.name === name && p.type === type) ?? null;
   },
   findPieceByPosition: (position) => {
-    return get().pieces.find((p) => p.position.x === position.x && p.position.y === position.y) ?? <Piece>{};
+    return get().pieces.find((p) => p.position.x === position.x && p.position.y === position.y) ?? null;
   },
   setPiecePosition: (piece, to) => {
     set({
@@ -82,13 +120,17 @@ export const useStore = create<Store>((set, get) => ({
   },
   canMovePiece: (piece, to) => {
     // if to is occupied no
-    if (get().findPieceByPosition(to).name) {
+    if (get().findPieceByPosition(to)) {
       return false;
     }
     const from = piece.position;
     switch (piece.type) {
       case 'knight':
         return canMoveKnight(from, to);
+      case 'bishop':
+        return canMoveBishop(from, to);
+      default:
+        return false
     }
   },
   handleSquareDrop: (piece, to) => {
@@ -97,7 +139,11 @@ export const useStore = create<Store>((set, get) => ({
     }
   },
   isCleared: () => {
-    const { x, y } = get().findPiece('black', 'knight').position;
+    const blackKnight = get().findPiece('black', 'knight');
+    if (!blackKnight) {
+      throw new Error('black knight not found');
+    }
+    const { x, y } = blackKnight.position;
     const goal = get().goalPosition;
     return x === goal.x && y === goal.y;
   }

@@ -1,7 +1,8 @@
 // libraries
-import React, { ReactNode } from 'react'
+import React, { ReactNode, useEffect, useState } from 'react'
 import { DndProvider } from 'react-dnd'
 import { HTML5Backend } from 'react-dnd-html5-backend'
+import { TouchBackend } from 'react-dnd-touch-backend'
 
 import { store } from '../store/useStore'
 
@@ -85,6 +86,11 @@ function renderPiece(piece: Piece | null): ReactNode {
   }
 }
 
+function isTouchDevice(): boolean {
+  return typeof window !== 'undefined' &&
+    ('ontouchstart' in window || navigator.maxTouchPoints > 0);
+};
+
 export default function Board(): ReactNode {
   const squares: ReactNode[] = []
   for (let i = 0; i < TotalSquares; i++) {
@@ -92,7 +98,7 @@ export default function Board(): ReactNode {
   }
 
   return (
-    <DndProvider backend={HTML5Backend}>
+    <DndProvider backend={isTouchDevice() ? TouchBackend : HTML5Backend}>
       <div
         style={{
           ...BoardStyle,
@@ -105,3 +111,5 @@ export default function Board(): ReactNode {
     </DndProvider>
   )
 }
+
+

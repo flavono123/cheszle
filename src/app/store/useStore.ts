@@ -21,13 +21,48 @@ function canMoveKnight(from: Position, to: Position) {
 
 
 export const useStore = create<Store>((set, get) => ({
-  pieces: [{
-    name: 'black',
-    type: 'knight',
-    position: {
-      x: 0, y: 0,
-    }
-  }],
+  pieces: [
+    {
+      name: 'black',
+      type: 'knight',
+      color: 'black',
+      position: {
+        x: 0, y: 0,
+      }
+    },
+    {
+      name: 'one',
+      type: 'knight',
+      color: 'white',
+      position: {
+        x: 0, y: 1,
+      }
+    },
+    {
+      name: 'two',
+      type: 'knight',
+      color: 'white',
+      position: {
+        x: 1, y: 1,
+      }
+    },
+    {
+      name: 'three',
+      type: 'knight',
+      color: 'white',
+      position: {
+        x: 2, y: 1,
+      }
+    },
+    {
+      name: 'four',
+      type: 'knight',
+      color: 'white',
+      position: {
+        x: 3, y: 1,
+      }
+    },
+  ],
   goalPosition: { x: 5, y: 2 },
   findPiece: (name, type) => {
     return get().pieces.find((p) => p.name === name && p.type === type) ?? <Piece>{};
@@ -46,6 +81,10 @@ export const useStore = create<Store>((set, get) => ({
     });
   },
   canMovePiece: (piece, to) => {
+    // if to is occupied no
+    if (get().findPieceByPosition(to).name) {
+      return false;
+    }
     const from = piece.position;
     switch (piece.type) {
       case 'knight':

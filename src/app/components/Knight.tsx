@@ -1,19 +1,23 @@
 // libraries
-import React, { Component } from 'react'
+import React, { ReactNode } from 'react'
 import { FaChessKnight } from "react-icons/fa6";
 
-export default class Knight extends Component {
-  render() {
-    return (
-      <div
-        style={{
-          color: 'black',
-          cursor: 'move',
-          fontSize: '3em',
-        }}
-      >
-        <FaChessKnight />
-      </div>
-    )
-  }
+import { PieceColor } from '../types/piece';
+
+interface Props {
+  color?: PieceColor;
+}
+
+export default function Knight({ color = 'black' }: Props): ReactNode {
+  return (
+    <div
+      style={{
+        color: color,
+        cursor: 'move',
+        fontSize: '3em',
+      }}
+    >
+      <FaChessKnight />
+    </div>
+  )
 }

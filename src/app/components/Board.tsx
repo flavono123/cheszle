@@ -61,7 +61,7 @@ function renderPiece(piece: Piece): ReactNode {
   if (piece && piece.type === 'knight')
     return (
       <Draggable piece={piece}>
-        <Knight />
+        <Knight color={piece.color} />
       </Draggable>
     );
 }

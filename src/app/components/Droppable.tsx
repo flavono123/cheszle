@@ -31,7 +31,7 @@ export default function Droppable({ x, y, children }: Props): ReactNode {
   return (
     <div
       ref={ref}
-      style={{
+      style={{ // HACK: 여기 맞아?
         position: 'relative',
         width: '100%',
         height: '100%',

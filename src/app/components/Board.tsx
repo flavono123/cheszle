@@ -7,7 +7,7 @@ import { TouchBackend } from 'react-dnd-touch-backend'
 import { store } from '../store/useStore'
 
 // components
-import Draggable from './Dragable'
+import Draggable from './Draggable'
 import Knight from './Knight'
 import Bishop from './Bishop'
 import Rook from './Rook'

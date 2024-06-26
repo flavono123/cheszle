@@ -16,10 +16,11 @@ type Store = {
   findPiece: (name: string, type: string) => Piece | null;
   findPieceByPosition: (position: Position) => Piece | null;
   setPiecePosition: (piece: Piece, to: Position) => void;
-  canMovePiece: (piece: Piece, to: Position) => boolean;
+  canDropPiece: (piece: Piece, to: Position) => boolean;
   handleSquareDrop: (from: Piece, to: Position) => void;
   moveCount: MoveCount;
   countMovement: (type: PieceType) => void;
+  moveMethod: 'dnd' | 'click';
   isCleared: () => boolean;
 };
 
@@ -40,6 +41,7 @@ function canMoveRook(from: Position, to: Position) {
 }
 
 export const store = create<Store>((set, get) => ({
+  moveMethod: 'dnd',
   pieces: [
     {
       name: 'black',
@@ -163,7 +165,7 @@ export const store = create<Store>((set, get) => ({
       }),
     });
   },
-  canMovePiece: (piece, to) => {
+  canDropPiece: (piece, to) => {
     // if to is occupied no
     if (get().findPieceByPosition(to)) {
       return false;
@@ -181,7 +183,7 @@ export const store = create<Store>((set, get) => ({
     }
   },
   handleSquareDrop: (piece, to) => {
-    if (get().canMovePiece(piece, to)) {
+    if (get().canDropPiece(piece, to)) {
       get().setPiecePosition(piece, to);
       get().countMovement(piece.type);
     }

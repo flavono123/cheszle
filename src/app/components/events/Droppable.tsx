@@ -12,11 +12,11 @@ interface Props {
 };
 
 export default function Droppable({ x, y, children }: Props): ReactNode {
-  const { canMovePiece, handleSquareDrop } = store();
+  const { canDropPiece, handleSquareDrop } = store();
   const to = { x, y };
   const [{ isOver, canDrop }, drop] = useDrop(() => ({
     accept: ItemType.KNIGHT,
-    canDrop: (item: Piece) => canMovePiece(item, to),
+    canDrop: (item: Piece) => canDropPiece(item, to),
     drop: (item: Piece) => handleSquareDrop(item, to),
     collect: monitor => ({
       isOver: !!monitor.isOver(),

@@ -1,9 +1,9 @@
 import React, { ReactNode, useRef } from 'react';
-import Overlay from './Overlay';
+import Overlay from '../ui/Overlay';
 import { useDrop } from 'react-dnd';
-import { ItemType } from '../types/item';
-import { Piece } from '../types/piece';
-import { store } from '../store/useStore';
+import { ItemType } from '../../types/item';
+import { Piece } from '../../types/piece';
+import { store } from '../../store/useStore';
 
 interface Props {
   x: number;

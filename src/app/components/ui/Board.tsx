@@ -4,13 +4,13 @@ import { DndProvider } from 'react-dnd'
 import { HTML5Backend } from 'react-dnd-html5-backend'
 import { TouchBackend } from 'react-dnd-touch-backend'
 
-import { store } from '../store/useStore'
+import { store } from '../../store/useStore'
 
 // components
-import Draggable from './Draggable'
-import Knight from './Knight'
-import Bishop from './Bishop'
-import Rook from './Rook'
+import Draggable from '../events/Draggable'
+import Knight from '../pieces/Knight'
+import Bishop from '../pieces/Bishop'
+import Rook from '../pieces/Rook'
 import BoardSquare from './BoardSquare'
 import InstuctionSquares from './InstructionSquares'
 
@@ -20,8 +20,8 @@ import {
   BoardSquareStyle,
   InstructionSquaresStyle,
   TotalSquares
-} from '../constants/styles'
-import { Piece } from '../types/piece'
+} from '../../constants/styles'
+import { Piece } from '../../types/piece'
 
 
 function renderSquare(i: number): ReactNode {

@@ -1,14 +1,14 @@
 // libraries
 import React, { ReactNode } from 'react'
-import { FaChessRook } from "react-icons/fa6";
+import { FaChessBishop } from "react-icons/fa6";
 
-import { PieceColor } from '../types/piece';
+import { PieceColor } from '../../types/piece';
 
 interface Props {
   color: PieceColor;
 }
 
-export default function Rook({ color }: Props): ReactNode {
+export default function Bishop({ color }: Props): ReactNode {
   return (
     <div
       style={{
@@ -17,7 +17,7 @@ export default function Rook({ color }: Props): ReactNode {
         fontSize: '3em',
       }}
     >
-      <FaChessRook />
+      <FaChessBishop />
     </div>
   )
 }

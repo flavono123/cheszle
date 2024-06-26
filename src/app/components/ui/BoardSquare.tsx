@@ -1,7 +1,7 @@
 import React, { ReactNode } from 'react'
 
 import Square from './Square'
-import Droppable from './Droppable'
+import Droppable from '../events/Droppable'
 
 interface Props {
   x: number

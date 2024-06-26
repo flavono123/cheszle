@@ -2,8 +2,8 @@
 
 // store: zustand
 import { store } from "./store/useStore";
-import Board from "./components/Board";
-import Result from "./components/Result";
+import Board from "./components/ui/Board";
+import Result from "./components/ui/Result";
 
 export default function Home() {
   const { isCleared } = store();

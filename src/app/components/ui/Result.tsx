@@ -1,6 +1,6 @@
 import React, { ReactNode } from 'react'
 
-import { store } from '../store/useStore'
+import { store } from '../../store/useStore'
 
 export default function Result(): ReactNode {
   const { moveCount } = store();

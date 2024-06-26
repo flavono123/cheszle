@@ -1,8 +1,8 @@
 import React, { ReactNode, useRef } from 'react';
 import { useDrag } from 'react-dnd';
 
-import { ItemType } from '../types/item';
-import { Piece } from '../types/piece';
+import { ItemType } from '../../types/item';
+import { Piece } from '../../types/piece';
 
 interface Props {
   piece: Piece;

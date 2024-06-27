@@ -25,6 +25,7 @@ export default function Draggable({ piece, children }: Props): ReactNode {
     <div
       ref={ref}
       style={{
+        cursor: 'move',
         opacity: isDragging ? 0.5 : 1
       }}
     >

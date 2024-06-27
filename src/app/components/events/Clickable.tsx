@@ -13,6 +13,9 @@ export default function Clickable({ piece, children }: Props): ReactNode {
   return (
     <div
       onClick={() => handleSquareClick(piece)}
+      style={{
+        cursor: 'pointer',
+      }}
     >
       {children}
     </div>

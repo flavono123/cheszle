@@ -13,7 +13,6 @@ export default function Rook({ color }: Props): ReactNode {
     <div
       style={{
         color: color,
-        cursor: 'move',
         fontSize: '3em',
       }}
     >

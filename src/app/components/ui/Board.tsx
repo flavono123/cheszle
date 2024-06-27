@@ -22,6 +22,7 @@ import {
   TotalSquares
 } from '../../constants/styles'
 import { Piece } from '../../types/piece'
+import Clickable from '../events/Clickable'
 
 
 function renderSquare(i: number): ReactNode {
@@ -74,6 +75,12 @@ function renderPiece(piece: Piece | null): ReactNode {
               <Knight color={piece.color} />
             </Draggable>
           }
+          {
+            store().moveMethod == 'click' &&
+            <Clickable piece={piece}>
+              <Knight color={piece.color} />
+            </Clickable>
+          }
         </>
       );
     case 'bishop':
@@ -85,6 +92,12 @@ function renderPiece(piece: Piece | null): ReactNode {
               <Bishop color={piece.color} />
             </Draggable>
           }
+          {
+            store().moveMethod == 'click' &&
+            <Clickable piece={piece}>
+              <Bishop color={piece.color} />
+            </Clickable>
+          }
         </>
       );
     case 'rook':
@@ -95,6 +108,12 @@ function renderPiece(piece: Piece | null): ReactNode {
             <Draggable piece={piece}>
               <Rook color={piece.color} />
             </Draggable>
+          }
+          {
+            store().moveMethod == 'click' &&
+            <Clickable piece={piece}>
+              <Rook color={piece.color} />
+            </Clickable>
           }
         </>
       );

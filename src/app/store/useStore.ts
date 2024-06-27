@@ -46,7 +46,7 @@ function canMoveRook(from: Position, to: Position) {
 }
 
 export const store = create<Store>((set, get) => ({
-  moveMethod: 'dnd',
+  moveMethod: 'click',
   pieces: [
     {
       name: 'black',

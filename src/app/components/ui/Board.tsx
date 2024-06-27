@@ -67,21 +67,36 @@ function renderPiece(piece: Piece | null): ReactNode {
   switch (piece.type) {
     case 'knight':
       return (
-        <Draggable piece={piece}>
-          <Knight color={piece.color} />
-        </Draggable>
+        <>
+          {
+            store().moveMethod == 'dnd' &&
+            <Draggable piece={piece}>
+              <Knight color={piece.color} />
+            </Draggable>
+          }
+        </>
       );
     case 'bishop':
       return (
-        <Draggable piece={piece}>
-          <Bishop color={piece.color} />
-        </Draggable>
+        <>
+          {
+            store().moveMethod == 'dnd' &&
+            <Draggable piece={piece}>
+              <Bishop color={piece.color} />
+            </Draggable>
+          }
+        </>
       );
     case 'rook':
       return (
-        <Draggable piece={piece}>
-          <Rook color={piece.color} />
-        </Draggable>
+        <>
+          {
+            store().moveMethod == 'dnd' &&
+            <Draggable piece={piece}>
+              <Rook color={piece.color} />
+            </Draggable>
+          }
+        </>
       );
   }
 }

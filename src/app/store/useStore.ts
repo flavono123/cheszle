@@ -26,6 +26,7 @@ type Store = {
   moveCount: MoveCount;
   countMovement: (type: PieceType) => void;
   moveMethod: 'dnd' | 'click';
+  setMoveMethod: (method: 'dnd' | 'click') => void;
   isCleared: () => boolean;
 };
 
@@ -47,6 +48,9 @@ function canMoveRook(from: Position, to: Position) {
 
 export const store = create<Store>((set, get) => ({
   moveMethod: 'click',
+  setMoveMethod: (method) => {
+    set({ moveMethod: method });
+  },
   pieces: [
     {
       name: 'black',
